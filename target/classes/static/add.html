@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>➕ Ajouter une tâche</h1>
+</header>
+
+<div class="container">
+    <form onsubmit="addTodo(event)">
+        <div id="error" class="error"></div>
+        <input type="text" id="title" placeholder="Nom de la tâche">
+        <button class="submit">Ajouter</button>
+    </form>
+</div>
+
+<script src="js/add.js"></script>
+</body>
+</html>

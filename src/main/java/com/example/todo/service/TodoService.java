@@ -1,22 +1,38 @@
 package com.example.todo.service;
 
-import com.example.todo.model.Todo;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.todo.model.Todo;
+import com.example.todo.repository.TodoRepository;
 
 @Service
 public class TodoService {
 
-    private final List<Todo> todos = new ArrayList<>();
+    private final TodoRepository repo;
 
-    public TodoService() {
-        todos.add(new Todo(1L, "Apprendre DevSecOps", false));
-        todos.add(new Todo(2L, "Configurer CI/CD", false));
+    public TodoService(TodoRepository repo) {
+        this.repo = repo;
     }
 
     public List<Todo> getTodos() {
-        return todos;
+        return repo.findAll();
+    }
+
+    public Todo addTodo(Todo todo) {
+        return repo.save(todo);
+    }
+
+    public void deleteTodo(Long id) {
+        repo.delete(id);
+    }
+
+    public Todo getTodo(Long id) {
+        return repo.findById(id);
+    }
+
+    public Todo updateTodo(Long id, Todo todo) {
+        return repo.update(id, todo);
     }
 }

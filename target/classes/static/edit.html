@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier</title>
+</head>
+<body>
+
+<h1>Modifier la tâche</h1>
+
+<form onsubmit="updateTodo(event)">
+    <input type="text" id="title" required>
+    <button type="submit">Modifier</button>
+</form>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    fetch('/todos/' + id)
+        .then(res => res.json())
+        .then(todo => {
+            document.getElementById('title').value = todo.title;
+        });
+
+    function updateTodo(event) {
+        event.preventDefault();
+
+        fetch('/todos/' + id, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                title: document.getElementById('title').value
+            })
+        }).then(() => {
+            window.location.href = 'index.html';
+        });
+    }
+</script>
+
+</body>
+</html>
