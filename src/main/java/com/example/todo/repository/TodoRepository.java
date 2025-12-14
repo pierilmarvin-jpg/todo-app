@@ -39,4 +39,9 @@ public class TodoRepository {
         todos.put(id, todo);
         return todo;
     }
+
+    public int count() {
+    return todos.size();
+}
+
 }
